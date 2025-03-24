@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
 <head>
-    <title></title>
+    <title>BIRS Zoom Client</title>
     <meta charset="utf-8" />
-    <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.16.0/css/bootstrap.css" />
-    <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.16.0/css/react-select.css" />
+    <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.18.0/css/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.18.0/css/react-select.css" />
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
@@ -52,13 +52,13 @@
     <nav id="nav-tool" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">.</a>
+                <a class="navbar-brand" href="#">BIRS Zoom Client</a>
             </div>
             <div id="navbar" class="websdktest">
                 <h4><span id="link"></span></h4>
                 <form class="navbar-form navbar-right" id="meeting_form">
                     <div class="form-group">
-                        <input type="text" name="display_name" id="display_name" value="2.16.0#CDN" maxLength="100"
+                        <input type="text" name="display_name" id="display_name" value="2.18.0#CDN" maxLength="100"
                             placeholder="Name" class="form-control" required>
                     </div>
                     <div class="form-group">
@@ -96,18 +96,17 @@
             </div>
         </div>
     </nav>
-    <script src="https://source.zoom.us/2.16.0/lib/vendor/react.min.js"></script>
-    <script src="https://source.zoom.us/2.16.0/lib/vendor/react-dom.min.js"></script>
-    <script src="https://source.zoom.us/2.16.0/lib/vendor/redux.min.js"></script>
-    <script src="https://source.zoom.us/2.16.0/lib/vendor/redux-thunk.min.js"></script>
-    <script src="https://source.zoom.us/2.16.0/lib/vendor/lodash.min.js"></script>
-    <script src="https://source.zoom.us/zoom-meeting-2.16.0.min.js"></script>
+    
+    <!-- Updated script references for Zoom Web SDK 2.18.0 -->
+    <script src="https://source.zoom.us/2.18.0/lib/vendor/react.min.js"></script>
+    <script src="https://source.zoom.us/2.18.0/lib/vendor/react-dom.min.js"></script>
+    <script src="https://source.zoom.us/2.18.0/lib/vendor/redux.min.js"></script>
+    <script src="https://source.zoom.us/2.18.0/lib/vendor/redux-thunk.min.js"></script>
+    <script src="https://source.zoom.us/2.18.0/lib/vendor/lodash.min.js"></script>
+    <script src="https://source.zoom.us/zoom-meeting-2.18.0.min.js"></script>
     <script src="js/tool.js"></script>
     <script src="js/vconsole.min.js"></script>
     <script src="js/index.js"></script>
-    <script>
-    </script>
-
 </body>
 
 </html>
