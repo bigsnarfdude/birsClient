@@ -5,30 +5,42 @@ window.addEventListener('DOMContentLoaded', function(event) {
 function websdkready() {
   var testTool = window.testTool;
   var tmpArgs = testTool.parseQuery();
+  
+  // Parse meeting parameters from URL
   var meetingConfig = {
     sdkKey: tmpArgs.sdkKey,
     meetingNumber: tmpArgs.mn,
-    userName: "frank",
+    userName: tmpArgs.name || "frank",
     passWord: tmpArgs.pwd,
     leaveUrl: "/index.html",
-    role: 0,
-    userEmail: "",
-    lang: tmpArgs.lang,
+    role: parseInt(tmpArgs.role, 10) || 0,
+    userEmail: tmpArgs.email || "",
+    lang: tmpArgs.lang || "en-US",
     signature: tmpArgs.signature || "",
     china: tmpArgs.china === "1",
   };
 
+  // Initialize Zoom SDK with new approach
   ZoomMtg.preLoadWasm();
-  ZoomMtg.prepareJssdk();
-  function beginJoin(signature) {
+  ZoomMtg.prepareWebSDK();
+
+  // Begin joining the meeting
+  function startMeeting(signature) {
+    // Make the Zoom meeting root element visible
+    if (document.getElementById('zmmtg-root')) {
+      document.getElementById('zmmtg-root').style.display = 'block';
+    }
+    
     ZoomMtg.init({
       leaveUrl: meetingConfig.leaveUrl,
-      webEndpoint: meetingConfig.webEndpoint,
-      disableCORP: !window.crossOriginIsolated, // default true
-      externalLinkPage: './externalLinkPage.html',
+      patchJsMedia: true,
+      leaveOnPageUnload: true,
       success: function () {
+        // Load language
         ZoomMtg.i18n.load(meetingConfig.lang);
         ZoomMtg.i18n.reload(meetingConfig.lang);
+        
+        // Join the meeting
         ZoomMtg.join({
           meetingNumber: meetingConfig.meetingNumber,
           userName: meetingConfig.userName,
@@ -37,39 +49,44 @@ function websdkready() {
           userEmail: meetingConfig.userEmail,
           passWord: meetingConfig.passWord,
           success: function (res) {
+            console.log("Successfully joined the meeting", res);
+            // Get attendees list
             ZoomMtg.getAttendeeslist({});
+            // Get current user info
             ZoomMtg.getCurrentUser({
               success: function (res) {
-                console.log("success getCurrentUser", res.result.currentUser);
+                console.log("Current user info:", res.result.currentUser);
               },
             });
           },
           error: function (res) {
-            console.log(res);
+            console.log("Failed to join the meeting", res);
           },
         });
       },
       error: function (res) {
-        console.log(res);
+        console.log("Failed to initialize Zoom SDK", res);
       },
     });
-
-    ZoomMtg.inMeetingServiceListener('onUserJoin', function (data) {
-      console.log('inMeetingServiceListener onUserJoin', data);
-    });
-  
-    ZoomMtg.inMeetingServiceListener('onUserLeave', function (data) {
-      console.log('inMeetingServiceListener onUserLeave', data);
-    });
-  
-    ZoomMtg.inMeetingServiceListener('onUserIsInWaitingRoom', function (data) {
-      console.log('inMeetingServiceListener onUserIsInWaitingRoom', data);
-    });
-  
-    ZoomMtg.inMeetingServiceListener('onMeetingStatus', function (data) {
-      console.log('inMeetingServiceListener onMeetingStatus', data);
-    });
   }
+  
+  // Set up meeting event listeners
+  ZoomMtg.inMeetingServiceListener('onUserJoin', function (data) {
+    console.log('User joined:', data);
+  });
 
-  beginJoin(meetingConfig.signature);
-};
+  ZoomMtg.inMeetingServiceListener('onUserLeave', function (data) {
+    console.log('User left:', data);
+  });
+
+  ZoomMtg.inMeetingServiceListener('onUserIsInWaitingRoom', function (data) {
+    console.log('User in waiting room:', data);
+  });
+
+  ZoomMtg.inMeetingServiceListener('onMeetingStatus', function (data) {
+    console.log('Meeting status changed:', data);
+  });
+
+  // Start the meeting with the signature from URL parameters
+  startMeeting(meetingConfig.signature);
+}
