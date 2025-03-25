@@ -5,6 +5,9 @@ bash one liner
 
 get file | parse meetingid password | open "link to zoom"
 
+just found project from zoom
+
+https://github.com/zoom/meetingsdk-headless-linux-sample
 ```
 
 A browser-based Zoom meeting client built with the Zoom Web SDK.
