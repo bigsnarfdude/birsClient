@@ -1,5 +1,12 @@
 # BIRS Zoom Web Client
 
+```
+bash one liner
+
+get file | parse meetingid password | open "link to zoom"
+
+```
+
 A browser-based Zoom meeting client built with the Zoom Web SDK.
 
 ## Overview
