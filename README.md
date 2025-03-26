@@ -1,12 +1,12 @@
 # BIRS Zoom Web Client
 
 ```
-bash one liner
-
+1. bash one liner
 get file | parse meetingid password | open "link to zoom"
 
-just found project from zoom (NOTE: need to publish to zoom marketplace and client needs approval from zoom to join meetings in other workplace spaces)
 
+
+2. project from zoom (NOTE: need to publish to zoom marketplace and client needs approval from zoom to join meetings in other workplace spaces)
 https://github.com/zoom/meetingsdk-headless-linux-sample
 ```
 
