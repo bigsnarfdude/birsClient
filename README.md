@@ -1,7 +1,7 @@
 # BIRS Zoom Web Client
 
 ```
-1. bash one liner
+1. bash one liner based on calling webSDK from Zoom
 get file | parse meetingid password | open "link to zoom"
 
 
